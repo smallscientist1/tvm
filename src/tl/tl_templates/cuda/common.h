@@ -76,3 +76,9 @@ TL_DEVICE void DP4A(InDatatype* a, InDatatype* b, OutDatatype* c) {
   const int c_int = *((int*)c);
   *c = __dp4a(a_int, b_int, c_int);
 }
+
+// fasttanh
+TL_DEVICE void fasttanh(float* x, float* y) {
+  const float x_val = *x;
+  asm ("tanh.approx.f32 %0,%1; \n\t" : "=f"(*y) : "f"(x_val));
+}
